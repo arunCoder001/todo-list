@@ -19,7 +19,7 @@ addBtn.addEventListener('click', function() {
             <button>
                 <i class='bx bx-edit'></i>
             </button>
-            <button>
+            <button id="dots-btn">
                <i class="bx bx-dots-vertical-rounded"></i>
             </button>
         </div>`;
@@ -61,11 +61,16 @@ function cross(btn){
       btn.forEach((element, index) => {
             element.addEventListener('change', (e) => {
                 console.log(e.target.nextElementSibling)
+                let tb = e.target.nextElementSibling.nextElementSibling.children;
+                
                 if(e.target.checked){
-                       e.target.nextElementSibling.style.textDecoration = 'line-through'
+                       e.target.nextElementSibling.style.textDecoration = 'line-through';
+                       tb[2].style.display = 'block';
                 }else{
-                    e.target.nextElementSibling.style.textDecoration = 'none'
+                    e.target.nextElementSibling.style.textDecoration = 'none';
+                    tb[2].style.display = 'none';
                 }
+                console.log(tb[2])
             })
       });
    }
@@ -97,4 +102,3 @@ edit(editBtn)
 
 
 
-// 

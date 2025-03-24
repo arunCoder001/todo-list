@@ -155,12 +155,11 @@ body{
 
 /* this is active classes */
 
-.dots-btn{
+#dots-btn{
     display: none;
-    overflow: hidden;
+   
+   
 }
 
-.dots-btn-active{
-    display: block;
-}
+
 /* end of active classes */
