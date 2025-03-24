@@ -151,3 +151,16 @@ body{
 }
 
 /* End of unic list */
+
+
+/* this is active classes */
+
+.dots-btn{
+    display: none;
+    overflow: hidden;
+}
+
+.dots-btn-active{
+    display: block;
+}
+/* end of active classes */

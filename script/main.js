@@ -19,13 +19,18 @@ addBtn.addEventListener('click', function() {
             <button>
                 <i class='bx bx-edit'></i>
             </button>
+            <button>
+               <i class="bx bx-dots-vertical-rounded"></i>
+            </button>
         </div>`;
         todoList.appendChild(li);
         todoInput.value = '';
         let deleteBtn = document.querySelectorAll('.bx-trash');
         crossBtn = document.querySelectorAll('.cross');
+        let editBtn = document.querySelectorAll('.bx-edit')
         trash(deleteBtn)
         cross(crossBtn)
+        edit(editBtn)
     }
 });
 
@@ -68,3 +73,28 @@ function cross(btn){
 
 cross(crossBtn)
 
+// edit btn
+
+let editBtn = document.querySelectorAll('.bx-edit');
+
+function edit(btn){
+   if(btn.length > 0){
+      btn.forEach((element, index) => {
+            element.addEventListener('click', (e) => {
+                let edit = e.target.parentElement.parentElement.parentElement.firstElementChild.nextElementSibling
+               
+                
+                let propt = prompt('Edit your todo', edit.textContent)
+                if(propt){
+                    edit.textContent = propt
+                }
+            })
+      });
+   }
+}
+
+edit(editBtn)
+
+
+
+// 
