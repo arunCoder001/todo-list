@@ -165,5 +165,32 @@ edit(editBtn)
 
 
 
+// this is  theme
+
+let themebtn = document.querySelector('#theme');
+
+themebtn.addEventListener('change', (e) => {
+    let value = e.target.value
+    
+    document.documentElement.setAttribute('data-theme', value);
+    
+    localStorage.setItem('theme', value)
+
+    
+})
+
+
+function loadtheme(){
+    let theme = localStorage.getItem('theme')
+    if(theme){
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+}
+
+loadtheme()
+// this is end of  theme
+
+
+
 
 
