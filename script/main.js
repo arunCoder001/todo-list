@@ -5,6 +5,7 @@ let addBtn = document.getElementById('add-btn');
 let todoList = document.getElementById('todo-list');
 
 addBtn.addEventListener('click', function() {
+   
     let todoItem = todoInput.value;
     if (todoItem) {
         let li = document.createElement('li');
@@ -28,12 +29,69 @@ addBtn.addEventListener('click', function() {
         let deleteBtn = document.querySelectorAll('.bx-trash');
         crossBtn = document.querySelectorAll('.cross');
         let editBtn = document.querySelectorAll('.bx-edit')
+        let text = document.querySelectorAll('.text')
         trash(deleteBtn)
         cross(crossBtn)
         edit(editBtn)
+        addData(text)
+       
     }
 });
 
+
+// this is add local host 
+function addData(data){
+    let demp = []
+    let demp2 = []
+    demp.push(data)
+    demp.forEach((element, index) => {
+        element.forEach((item, index) => {
+            demp2.push(item.textContent)
+        })
+    });
+    localStorage.setItem('todo', JSON.stringify(demp2))
+}
+
+// end of local host
+
+function dataFetcher(){
+    let data = JSON.parse(localStorage.getItem('todo'))
+    if(data){
+        data.forEach((element, index) => {
+            let li = document.createElement('li');
+            li.innerHTML = `<input type="checkbox" name="todo-item" id=""class="cross">
+        <span class="text">
+            ${element}
+        </span>
+        <div class="tool-btn">
+            <button>
+                <i class='bx bx-trash'></i>
+            </button>
+            <button>
+                <i class='bx bx-edit'></i>
+            </button>
+            <button id="dots-btn">
+               <i class="bx bx-dots-vertical-rounded"></i>
+            </button>
+        </div>`;
+        todoList.appendChild(li);
+        let deleteBtn = document.querySelectorAll('.bx-trash');
+        let crossBtn = document.querySelectorAll('.cross');
+        let editBtn = document.querySelectorAll('.bx-edit')
+        trash(deleteBtn)
+        cross(crossBtn)
+        edit(editBtn)
+        })
+        
+}
+}
+
+
+dataFetcher()
+
+// list is add local data
+
+// end of local host
 // delete list
 
 let deleteBtn = document.querySelectorAll('.bx-trash');
@@ -44,6 +102,7 @@ function trash(btn){
       btn.forEach((element, index) => {
             element.addEventListener('click', (e) => {
                 console.log(e.target.parentElement.parentElement.parentElement.remove())
+                addData(document.querySelectorAll('.text'))
             })
       });
    }
@@ -66,10 +125,13 @@ function cross(btn){
                 if(e.target.checked){
                        e.target.nextElementSibling.style.textDecoration = 'line-through';
                        tb[2].style.display = 'block';
+                       addData(document.querySelectorAll('.text'))
                 }else{
                     e.target.nextElementSibling.style.textDecoration = 'none';
                     tb[2].style.display = 'none';
+                    addData(document.querySelectorAll('.text'))
                 }
+                
                 console.log(tb[2])
             })
       });
@@ -91,7 +153,8 @@ function edit(btn){
                 
                 let propt = prompt('Edit your todo', edit.textContent)
                 if(propt){
-                    edit.textContent = propt
+                    edit.textContent = propt;
+                    addData(document.querySelectorAll('.text'))
                 }
             })
       });
@@ -99,6 +162,8 @@ function edit(btn){
 }
 
 edit(editBtn)
+
+
 
 
 
