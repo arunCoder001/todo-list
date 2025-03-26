@@ -20,6 +20,10 @@
     --border-color: #00ffe0; /* Neon Aqua border */
 }
   
+
+i{
+    color: var(--text-color);
+}
 body{
     background-color:var(--bg-color);
     width: 100vw;
@@ -184,5 +188,9 @@ select{
     border: none;
     overflow: hidden;
     outline: none;
+}
+
+.newTime{
+    white-space: nowrap;
 }
 /* end of seletive */

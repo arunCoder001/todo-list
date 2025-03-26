@@ -1,14 +1,12 @@
-// script.js
-
 let todoInput = document.getElementById('todo-input');
 let addBtn = document.getElementById('add-btn');
 let todoList = document.getElementById('todo-list');
-
-
+dataFetcher()
+let time = new Date();
+console.log(time.getMinutes())
 addBtn.addEventListener('click', function() {
    
     let todoItem = todoInput.value;
-    let time = new Date();
     if (todoItem) {
         let li = document.createElement('li');
         li.innerHTML = `<input type="checkbox" name="todo-item" id=""class="cross">
@@ -16,7 +14,7 @@ addBtn.addEventListener('click', function() {
             ${todoItem}
         </span>
         <div class="time">
-             <span class="newTime">${time.getHours()}:${time.getMinutes()}</span>
+             <span class="newTime">${setTimeout(() => {return time.getHours() + ':' + time.getMinutes()}, 1000)}</span>
         </div>
         <div class="tool-btn">
             <button>
@@ -40,7 +38,7 @@ addBtn.addEventListener('click', function() {
         cross(crossBtn)
         edit(editBtn)
         addData(text, newTime)
-       
+        dataFetcher()
     }
 });
 
@@ -55,7 +53,7 @@ function addData(data, time){
    
     if(data.length > 0){
         data.forEach((element, index) => {
-            demp.text.push(data[index].textContent.trim())
+            demp.text.push(element[index])
             demp.time.push(time[index].textContent)
         })
     }
@@ -64,23 +62,23 @@ function addData(data, time){
 
     
 
+    console.log(demp)
     localStorage.setItem('todo', JSON.stringify(demp))
 }
 
 // end of local host
 
 function dataFetcher(){
-        let data = JSON.parse(localStorage.getItem('todo'))
-
-        if(data){
-            data.text.forEach((element, index) => {
-                let li = document.createElement('li');
-        li.innerHTML = `<input type="checkbox" name="todo-item" id=""class="cross">
+    let data = JSON.parse(localStorage.getItem('todo'))
+    if(data){
+        data.text.forEach((element, index) => {
+            let li = document.createElement('li');
+            li.innerHTML = `<input type="checkbox" name="todo-item" id=""class="cross">
         <span class="text">
-            ${data.text[index]}
+            ${element}
         </span>
         <div class="time">
-             <span class="newTime">${data.time[index]}</span>
+                <span>${element.time}</span>
         </div>
         <div class="tool-btn">
             <button>
@@ -94,28 +92,16 @@ function dataFetcher(){
             </button>
         </div>`;
         todoList.appendChild(li);
-         let deleteBtn = document.querySelectorAll('.bx-trash');
+        let deleteBtn = document.querySelectorAll('.bx-trash');
         let crossBtn = document.querySelectorAll('.cross');
         let editBtn = document.querySelectorAll('.bx-edit')
-        let text = document.querySelectorAll('.text')
-        let newTime = document.querySelectorAll('.newTime')
         trash(deleteBtn)
         cross(crossBtn)
         edit(editBtn)
-        addData(text, newTime)
-             })
-        }
-
-
-
-
-
-
-       
-        
+        })
         
 }
-
+}
 
 
 dataFetcher()
@@ -132,9 +118,8 @@ function trash(btn){
    if(btn.length > 0){
       btn.forEach((element, index) => {
             element.addEventListener('click', (e) => {
-                e.target.parentElement.parentElement.parentElement.remove()
-                addData(document.querySelectorAll('.text'), document.querySelectorAll('.newTime'))
-               
+                console.log(e.target.parentElement.parentElement.parentElement.remove())
+                addData(document.querySelectorAll('.text'))
             })
       });
    }
@@ -157,13 +142,11 @@ function cross(btn){
                 if(e.target.checked){
                        e.target.nextElementSibling.style.textDecoration = 'line-through';
                        tb[2].style.display = 'block';
-                       addData(document.querySelectorAll('.text'), document.querySelectorAll('.newTime'))
-                       
+                       addData(document.querySelectorAll('.text'))
                 }else{
                     e.target.nextElementSibling.style.textDecoration = 'none';
                     tb[2].style.display = 'none';
-                    addData(document.querySelectorAll('.text'), document.querySelectorAll('.newTime'))
-                    
+                    addData(document.querySelectorAll('.text'))
                 }
                 
                
@@ -188,7 +171,7 @@ function edit(btn){
                 let propt = prompt('Edit your todo', edit.textContent)
                 if(propt){
                     edit.textContent = propt;
-                    addData(document.querySelectorAll('.text'),document.querySelectorAll('.newTime'))
+                    addData(document.querySelectorAll('.text'))
                 }
             })
       });
