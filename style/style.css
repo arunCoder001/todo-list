@@ -1,7 +1,10 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
     color: var(--text-color);
     background: var(--bg-color);
@@ -38,12 +41,22 @@ body{
 .todo-container{
     width: 90%;
     height: 200px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     top: 23px;
     position: relative;
 }
@@ -88,7 +101,8 @@ body{
     position: relative;
     top: 35px;
     overflow-y: auto;
-    box-shadow: 0 0  12px 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0  12px 2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0  12px 2px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     background-color: var(--bg-color);
 }
@@ -101,20 +115,35 @@ body{
     width: 90%;
     height: 100%;
     margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     
 }
 
 .todo-list ul li{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding: 10px;
     border-bottom: 1px solid var(--border-color);
     width: 100%;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden;
 }
 
 .todo-list ul li input{
@@ -125,6 +154,7 @@ body{
     border-radius: 5px;
     outline: none;
     cursor: pointer;
+    background: var(--bg-color);
 }
 
 .todo-list ul li span{
@@ -135,6 +165,7 @@ body{
     cursor: pointer;
     margin: 5px;
     text-decoration: none;
+    font-size: 16px;
 }
 .text{
     text-decoration: none;
@@ -144,9 +175,15 @@ body{
 }
 .todo-list ul li .tool-btn{
     width: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin: 5px;
 }
 
@@ -159,9 +196,15 @@ body{
     cursor: pointer;
     background-color: transparent;
     margin: 4px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     text-shadow: 0 0 7px var(--text-color);
 }
 
@@ -176,6 +219,7 @@ body{
 
 #dots-btn{
     display: none;
+    
 }
 
 
@@ -193,4 +237,55 @@ select{
 .newTime{
     white-space: nowrap;
 }
+
+.filter{
+    position: absolute;
+    top: 0px;
+    left: 0;
+}
+.filter select{
+    border: 1px solid var(--border-color);
+    margin: 12px;
+}
 /* end of seletive */
+
+
+/* this is filter of responsive */
+
+
+@media  (max-width: 780px){
+    
+    .filter{
+        display: none;
+    }
+    
+}
+/* end of responseve */
+
+input[type="range"]{
+    -webkit-appearance: none;
+    width: 300px;
+    height: 2px;
+    background: -webkit-gradient(linear, left top, right top, from(#00f260), to(#0575e6));
+    background: -o-linear-gradient(left, #00f260, #0575e6);
+    background: linear-gradient(90deg, #00f260, #0575e6);
+    border-radius: 50px;
+    -webkit-box-shadow: 0 0 15px rgba(0, 255, 150, 0.6);
+            box-shadow: 0 0 15px rgba(0, 255, 150, 0.6);
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: background 0.3s ease;
+    -o-transition: background 0.3s ease;
+    transition: background 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #00ffe0;
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-transition: background 0.3s ease;
+    transition: background 0.3s ease;
+}

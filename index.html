@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        
+       
         <div class="todo-container">
             <div class="todo-header">
                 <h1>Todo List</h1>
@@ -17,14 +17,29 @@
             <div class="todo-input">
                 <input type="text" id="todo-input" placeholder="Add a new task">
                 <button id="add-btn">Add</button>
-                <select name="" id="theme">
-                    <option value="light">
-                        <i class='bx bx-sun'></i> light
-
-                    </option>
-                    <option value="dark">
-                        <i id="theme-icon" class='bx bx-moon'></i> Dark</option>
-                </select>
+                <div class="filter">
+                    <select name="" id="theme">
+                        <option value="light">
+                            <i class='bx bx-sun'></i> light
+    
+                        </option>
+                        <option value="dark">
+                            <i id="theme-icon" class='bx bx-moon'></i> Dark</option>
+                    </select>
+                    <select name="" id="font-family">
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                    </select>
+                    <div>
+                        <label for="font-size">Font Size</label>
+                        <input type="range" name="" min="4" max="25" value="18" id="font-size">
+                    </div>
+                </div>
+                
             </div>
            
         </div>

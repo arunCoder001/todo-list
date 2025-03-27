@@ -8,7 +8,7 @@ let todoList = document.getElementById('todo-list');
 addBtn.addEventListener('click', function() {
    
     let todoItem = todoInput.value;
-    let time = new Date();
+    
     if (todoItem) {
         let li = document.createElement('li');
         li.innerHTML = `<input type="checkbox" name="todo-item" id=""class="cross">
@@ -16,7 +16,7 @@ addBtn.addEventListener('click', function() {
             ${todoItem}
         </span>
         <div class="time">
-             <span class="newTime">${time.getHours()}:${time.getMinutes()}</span>
+             <span class="newTime">${time()}</span>
         </div>
         <div class="tool-btn">
             <button>
@@ -40,11 +40,41 @@ addBtn.addEventListener('click', function() {
         cross(crossBtn)
         edit(editBtn)
         addData(text, newTime)
+        sizeTb()
        
     }
 });
 
 
+// this is time fuction
+
+
+function time(){
+    let time = new Date();
+    let minutes = time.getMinutes();
+    let hours = time.getHours();
+
+    if(minutes < 10){
+        minutes = '0' + minutes
+ 
+    }
+   if(hours > 12){
+       hours =  hours - 12 
+       minutes = minutes + ' PM'
+   }
+    else if(hours == 0){
+        hours = 12 + ' AM';
+        minutes = minutes + ' AM'
+    }
+   
+   
+
+   return hours + ':' + minutes
+
+}
+
+time()
+// end of time fuction
 // this is add local host 
 function addData(data, time){
     let demp = {
@@ -99,6 +129,7 @@ function dataFetcher(){
         let editBtn = document.querySelectorAll('.bx-edit')
         let text = document.querySelectorAll('.text')
         let newTime = document.querySelectorAll('.newTime')
+        sizeTb()
         trash(deleteBtn)
         cross(crossBtn)
         edit(editBtn)
@@ -132,8 +163,16 @@ function trash(btn){
    if(btn.length > 0){
       btn.forEach((element, index) => {
             element.addEventListener('click', (e) => {
-                e.target.parentElement.parentElement.parentElement.remove()
-                addData(document.querySelectorAll('.text'), document.querySelectorAll('.newTime'))
+                e.target.parentElement.parentElement.parentElement.style.width = 0 + 'px';
+                e.target.parentElement.parentElement.parentElement.style.opacity = 0;
+                e.target.parentElement.parentElement.parentElement.style.transition = '0.5s';
+                e.target.parentElement.parentElement.parentElement.style.overflow = 'hidden';
+                e.target.parentElement.parentElement.parentElement.style.height = 0 + 'px';
+                setTimeout(() => {
+                    e.target.parentElement.parentElement.parentElement.remove()
+                    addData(document.querySelectorAll('.text'), document.querySelectorAll('.newTime'))
+                },1000)
+                
                
             })
       });
@@ -185,7 +224,7 @@ function edit(btn){
                 let edit = e.target.parentElement.parentElement.parentElement.firstElementChild.nextElementSibling
                
                 
-                let propt = prompt('Edit your todo', edit.textContent)
+                let propt = prompt('Edit your todo', edit.textContent.trim())
                 if(propt){
                     edit.textContent = propt;
                     addData(document.querySelectorAll('.text'),document.querySelectorAll('.newTime'))
@@ -229,3 +268,48 @@ loadtheme()
 
 
 
+// this is font family
+
+let fontfamily = document.querySelector('#font-family')
+
+fontfamily.addEventListener('change', (e) => {
+    let value = e.target.value
+    
+    document.body.style.fontFamily = value;
+    
+    localStorage.setItem('font', value)
+})
+
+
+function loadFont(){
+    let font = localStorage.getItem('font')
+    if(font){
+       document.body.style.fontFamily = font 
+    }
+}
+
+loadFont()
+// End of font family
+
+
+// font size
+
+function sizeTb(){
+    let fontsize = document.querySelector('#font-size');
+let text = document.querySelectorAll('.text')
+
+fontsize.addEventListener('change', (e) => {
+    let value = e.target.value
+    console.log(value)
+    text.forEach((element, index) => {
+        element.style.fontSize = value + 'px'
+    })
+    
+    
+})
+    
+    }
+
+sizeTb()
+
+// end of font size
